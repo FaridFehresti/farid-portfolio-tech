@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { profile } from "@/lib/resume";
 
 const LINKS = [
-  { href: "#promo", label: "Promo" },
   { href: "#about", label: "About" },
   { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },

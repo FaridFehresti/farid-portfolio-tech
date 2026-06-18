@@ -14,7 +14,7 @@ export function Hero() {
           alt={`${profile.brand} logo`}
           width={260}
           height={260}
-          className="animate-pulse-glow h-44 w-44 object-contain sm:h-56 sm:w-56 md:h-64 md:w-64"
+          className="animate-pulse-glow h-52 w-52 object-contain sm:h-64 sm:w-64 md:h-72 md:w-72"
         />
       </div>
 
@@ -53,8 +53,8 @@ export function Hero() {
 
       {/* Scroll cue */}
       <a
-        href="#promo"
-        aria-label="Scroll to promo"
+        href="#about"
+        aria-label="Scroll to about"
         className="absolute bottom-7 left-1/2 -translate-x-1/2"
       >
         <span className="flex h-9 w-5 items-start justify-center rounded-full border border-red/40 p-1">

@@ -1,6 +1,5 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
-import { ScrollPromo } from "@/components/ScrollPromo";
 import { About } from "@/components/About";
 import { Experience } from "@/components/Experience";
 import { Projects } from "@/components/Projects";
@@ -14,7 +13,6 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <ScrollPromo />
         <About />
         <div className="mx-auto max-w-6xl px-5 md:px-8">
           <div className="divider-glow" />
