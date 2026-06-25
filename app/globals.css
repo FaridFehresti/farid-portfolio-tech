@@ -132,13 +132,6 @@ body::after {
   font-family: var(--font-mono), ui-monospace, monospace;
 }
 
-/* Soft-crop the baked-in wordmark off the combined logo PNG, keeping the
-   skull and its glow. The brand name is rendered as real text instead. */
-.logo-skull {
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 69%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 69%);
-}
-
 .neon {
   color: var(--red-bright);
   text-shadow:
