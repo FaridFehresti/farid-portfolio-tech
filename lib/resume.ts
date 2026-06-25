@@ -174,10 +174,10 @@ export const projects: Project[] = [
       "Full stack development with infrastructure management — Nginx deployment and SSL certificates on a Linux server.",
   },
   {
-    name: "TuningCompany",
+    name: "Tuning Tech",
     tagline: "Car Tuning Calculation",
-    url: "https://tuningcompany.co.uk",
-    display: "tuningcompany.co.uk",
+    url: "https://tuningtech.co.uk",
+    display: "tuningtech.co.uk",
     stack: ["Next.js", "NestJS", "PostgreSQL", "Material-UI"],
     description:
       "Car parts upgrade-impact calculation system with a content-management panel for admins.",

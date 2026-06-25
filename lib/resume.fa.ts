@@ -146,10 +146,10 @@ export const projects: Project[] = [
       "توسعه‌ی فول‌استک همراه با مدیریت زیرساخت — استقرار Nginx و گواهی‌های SSL روی سرور لینوکس.",
   },
   {
-    name: "TuningCompany",
+    name: "Tuning Tech",
     tagline: "محاسبه‌ی تیونینگ خودرو",
-    url: "https://tuningcompany.co.uk",
-    display: "tuningcompany.co.uk",
+    url: "https://tuningtech.co.uk",
+    display: "tuningtech.co.uk",
     stack: ["Next.js", "NestJS", "PostgreSQL", "Material-UI"],
     description:
       "سیستم محاسبه‌ی تأثیر ارتقای قطعات خودرو، همراه با پنل مدیریت محتوا برای ادمین‌ها.",
