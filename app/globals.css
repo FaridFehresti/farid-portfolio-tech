@@ -154,87 +154,91 @@ body::after {
 }
 
 
-/* Squared HUD tag (was a rounded pill) ------------------------------------- */
+/* Small tech tag (clean, subtle) ------------------------------------------ */
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
   font-family: var(--font-mono), monospace;
   font-size: 0.7rem;
-  letter-spacing: 0.04em;
-  padding: 0.2rem 0.55rem;
-  border-radius: 2px;
-  border: 1px solid rgba(255, 34, 51, 0.22);
-  background: rgba(255, 34, 51, 0.05);
-  color: #ffb3ba;
+  letter-spacing: 0.02em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--muted);
   transition:
     border-color 0.25s ease,
-    background-color 0.25s ease;
-}
-.chip::before {
-  content: "";
-  width: 4px;
-  height: 4px;
-  background: var(--red);
-  box-shadow: 0 0 5px var(--red);
+    color 0.25s ease;
 }
 .group:hover .chip,
 .chip:hover {
-  border-color: rgba(255, 34, 51, 0.45);
-  background: rgba(255, 34, 51, 0.09);
+  border-color: rgba(255, 34, 51, 0.32);
+  color: #ffb3ba;
 }
 
-/* ---- HUD card: bracketed, near-square, terminal panel ------------------- */
-.hud-card {
+/* ---- Clean card: soft panel, hover lift glow (no terminal chrome) ------- */
+.card {
   position: relative;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.014) 0px,
-      rgba(255, 255, 255, 0.014) 1px,
-      transparent 1px,
-      transparent 4px
-    ),
-    linear-gradient(160deg, var(--panel) 0%, var(--panel-2) 100%);
+  background: linear-gradient(160deg, var(--panel) 0%, var(--panel-2) 100%);
   border: 1px solid var(--border);
-  border-radius: 3px;
+  border-radius: 16px;
   transition:
     border-color 0.3s ease,
     box-shadow 0.3s ease;
 }
-.hud-card::before,
-.hud-card::after {
+.card:hover {
+  border-color: rgba(255, 34, 51, 0.4);
+  box-shadow: 0 16px 50px -18px rgba(255, 34, 51, 0.55);
+}
+
+/* Gradient monogram media header (fallback when no cover image) ----------- */
+.monogram {
+  position: relative;
+  overflow: hidden;
+}
+.monogram::after {
   content: "";
   position: absolute;
-  width: 13px;
-  height: 13px;
-  border-color: var(--red);
-  opacity: 0.45;
-  transition: opacity 0.3s ease;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 34, 51, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 34, 51, 0.06) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, #000, transparent 75%);
   pointer-events: none;
-  z-index: 2;
 }
-.hud-card::before {
-  top: 6px;
-  left: 6px;
-  border-top: 1.5px solid;
-  border-left: 1.5px solid;
+
+/* Auto-scrolling stack marquee ------------------------------------------- */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 7%,
+    #000 93%,
+    transparent
+  );
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
 }
-.hud-card::after {
-  right: 6px;
-  bottom: 6px;
-  border-right: 1.5px solid;
-  border-bottom: 1.5px solid;
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 0.6rem;
+  animation: marquee var(--dur, 40s) linear infinite;
+  animation-direction: var(--dir, normal);
+  will-change: transform;
 }
-.hud-card:hover {
-  border-color: rgba(255, 34, 51, 0.4);
-  box-shadow: 0 12px 44px -16px rgba(255, 34, 51, 0.5);
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
 }
-.hud-card:hover::before,
-.hud-card:hover::after,
-.group:hover.hud-card::before,
-.group:hover.hud-card::after {
-  opacity: 1;
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .divider-glow {
@@ -388,5 +392,8 @@ body::after {
   .tilt-wrap {
     transition: none;
     transform: none !important;
+  }
+  .marquee-track {
+    animation: none;
   }
 }

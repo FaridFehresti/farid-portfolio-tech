@@ -1,6 +1,8 @@
 import type { Dictionary } from "@/lib/i18n";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal } from "./Reveal";
+import { TiltCard } from "./TiltCard";
+import { MediaHeader } from "./MediaHeader";
 
 export function Experience({ dict }: { dict: Dictionary }) {
   const { experience, ui } = dict;
@@ -12,32 +14,38 @@ export function Experience({ dict }: { dict: Dictionary }) {
         title={ui.sections.experience.title}
       />
 
-      <div className="relative ms-2 border-s border-border ps-8 md:ms-3 md:ps-10">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {experience.map((job, i) => (
-          <Reveal
-            key={`${job.company}-${job.period}`}
-            delay={i * 60}
-            className="relative pb-10 last:pb-0"
-          >
-            {/* node */}
-            <span
-              className={`absolute -start-[2.55rem] top-1.5 flex h-4 w-4 items-center justify-center rounded-full md:-start-[3.05rem] ${
-                job.current ? "bg-red-bright" : "bg-panel"
-              }`}
-              style={{ boxShadow: "0 0 0 4px #07070a, 0 0 0 5px var(--border)" }}
+          <Reveal key={`${job.company}-${job.period}`} delay={(i % 3) * 80} className="h-full">
+            <TiltCard
+              cover={
+                <MediaHeader
+                  name={job.company}
+                  index={i}
+                  badge={
+                    job.current ? (
+                      <span className="flex items-center gap-1.5">
+                        <span className="relative flex h-1.5 w-1.5">
+                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-bright/70" />
+                          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-red-bright" />
+                        </span>
+                        Present
+                      </span>
+                    ) : undefined
+                  }
+                />
+              }
             >
-              {job.current ? (
-                <span className="absolute h-4 w-4 animate-ping rounded-full bg-red-bright/60" />
-              ) : null}
-            </span>
-
-            <p className="font-mono text-xs uppercase tracking-widest text-red">{job.period}</p>
-            <h3 className="font-heading mt-1 text-xl font-semibold text-foreground md:text-2xl">
-              {job.role}
-            </h3>
-            <p className="mt-0.5 text-sm text-muted">
-              {job.company} · {job.location}
-            </p>
+              <h3 className="font-heading text-lg font-semibold text-foreground transition-colors group-hover:text-red-bright">
+                {job.role}
+              </h3>
+              <p className="mt-1 flex-1 text-sm text-muted">
+                {job.company} · {job.location}
+              </p>
+              <p className="mt-3 font-mono text-xs uppercase tracking-wider text-red" dir="ltr">
+                {job.period}
+              </p>
+            </TiltCard>
           </Reveal>
         ))}
       </div>

@@ -37,7 +37,7 @@ export const profile = {
   tagline:
     "I build products that generate revenue and stay in production — from CRM sales systems to international enterprise platforms.",
   summary:
-    "Over four years of experience working on projects that directly generate revenue — from CRM sales systems to international enterprise platforms. What has always mattered to me is that the code I write solves a real problem, not just runs. I've led teams, coded directly, and built products that are still in use today.",
+    "Over five years of experience working on projects that directly generate revenue — from CRM sales systems to international enterprise platforms. What has always mattered to me is that the code I write solves a real problem, not just runs. I've led teams, coded directly, and built products that are still in use today.",
 } as const;
 
 export const contact = {
@@ -51,10 +51,10 @@ export const contact = {
 } as const;
 
 export const stats: { value: string; label: string }[] = [
-  { value: "4+", label: "Years building revenue products" },
+  { value: "5+", label: "Years building revenue products" },
   { value: "10+", label: "Apps shipped to production" },
   { value: "4", label: "International projects delivered" },
-  { value: "1:500", label: "Leverage broker UI shipped" },
+  { value: "2025", label: "Best Broker — Forex Expo Dubai" },
 ];
 
 export const experience: Experience[] = [

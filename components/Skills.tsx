@@ -1,39 +1,28 @@
 import type { Dictionary } from "@/lib/i18n";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal } from "./Reveal";
+import { StackMarquee } from "./StackMarquee";
 
 export function Skills({ dict }: { dict: Dictionary }) {
   const { skillGroups, languages, education, ui } = dict;
   return (
-    <section id="skills" className="mx-auto max-w-6xl px-5 py-24 md:px-8 md:py-32">
-      <SectionHeading
-        index="04"
-        kicker={ui.sections.skills.kicker}
-        title={ui.sections.skills.title}
-      />
-
-      <div className="grid gap-5 md:grid-cols-2">
-        {skillGroups.map((group, i) => (
-          <Reveal key={group.title} delay={(i % 2) * 80} className="hud-card group p-6">
-            <h3 className="font-heading text-base font-semibold uppercase tracking-wider text-red-bright">
-              <span className="font-mono text-muted/50">// </span>
-              {group.title}
-            </h3>
-            <div className="mt-4 flex flex-wrap gap-1.5" dir="ltr">
-              {group.items.map((item) => (
-                <span key={item} className="chip">
-                  {item}
-                </span>
-              ))}
-            </div>
-          </Reveal>
-        ))}
+    <section id="skills" className="py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
+        <SectionHeading
+          index="04"
+          kicker={ui.sections.skills.kicker}
+          title={ui.sections.skills.title}
+        />
       </div>
 
-      <div className="mt-5 grid gap-5 md:grid-cols-2">
-        <Reveal className="hud-card group p-6">
+      {/* Full-bleed auto-scrolling stack */}
+      <Reveal>
+        <StackMarquee groups={skillGroups} />
+      </Reveal>
+
+      <div className="mx-auto mt-14 grid max-w-6xl gap-5 px-5 md:grid-cols-2 md:px-8">
+        <Reveal className="card p-6">
           <h3 className="font-heading text-base font-semibold uppercase tracking-wider text-red-bright">
-            <span className="font-mono text-muted/50">// </span>
             {ui.skills.languages}
           </h3>
           <ul className="mt-4 space-y-2.5">
@@ -46,9 +35,8 @@ export function Skills({ dict }: { dict: Dictionary }) {
           </ul>
         </Reveal>
 
-        <Reveal delay={80} className="hud-card group p-6">
+        <Reveal delay={80} className="card p-6">
           <h3 className="font-heading text-base font-semibold uppercase tracking-wider text-red-bright">
-            <span className="font-mono text-muted/50">// </span>
             {ui.skills.education}
           </h3>
           <ul className="mt-4 space-y-3">

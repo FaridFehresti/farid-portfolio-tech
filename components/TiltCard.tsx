@@ -36,7 +36,7 @@ export function TiltCard({ children, href, external, className = "", cover }: Ti
     if (ref.current) ref.current.style.transform = "";
   }
 
-  const cardClass = `hud-card group relative flex h-full flex-col overflow-hidden ${className}`;
+  const cardClass = `card group relative flex h-full flex-col overflow-hidden ${className}`;
   const content = (
     <>
       <span className="tilt-glare" aria-hidden />

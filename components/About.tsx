@@ -20,14 +20,11 @@ export function About({ dict }: { dict: Dictionary }) {
         </Reveal>
 
         <Reveal delay={120} className="grid grid-cols-2 gap-4 self-start">
-          {stats.map((s, i) => (
-            <div key={s.label} className="hud-card group p-5">
-              <span className="font-mono text-[0.6rem] tracking-widest text-red/70">
-                {`_${String(i + 1).padStart(2, "0")}`}
-              </span>
+          {stats.map((s) => (
+            <div key={s.label} className="card group p-5">
               <Counter
                 value={s.value}
-                className="font-display mt-1 block text-3xl font-black text-red-bright neon-soft md:text-4xl"
+                className="font-display block text-3xl font-black text-red-bright neon-soft md:text-4xl"
               />
               <p className="mt-2 text-xs leading-snug text-muted">{s.label}</p>
             </div>

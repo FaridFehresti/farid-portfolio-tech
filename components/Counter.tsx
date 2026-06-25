@@ -16,7 +16,9 @@ type CounterProps = {
 export function Counter({ value, className }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const reduced = useReducedMotion();
-  const match = value.match(/^(\d+)(\+?)$/);
+  const m = value.match(/^(\d+)(\+?)$/);
+  // Animate small counts only — leave years (e.g. "2025") static.
+  const match = m && Number(m[1]) <= 999 ? m : null;
 
   useEffect(() => {
     if (!match || reduced) return;

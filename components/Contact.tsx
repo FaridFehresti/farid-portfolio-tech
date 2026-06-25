@@ -59,12 +59,11 @@ export function Contact({ dict }: { dict: Dictionary }) {
 
         <Reveal delay={120} className="self-start">
           <h3 className="font-heading text-base font-semibold uppercase tracking-wider text-red-bright">
-            <span className="font-mono text-muted/50">// </span>
             {ui.contact.references}
           </h3>
           <div className="mt-4 space-y-3">
             {references.map((r) => (
-              <div key={r.name} className="hud-card group p-4">
+              <div key={r.name} className="card group p-4">
                 <p className="text-sm font-medium text-foreground">{r.name}</p>
                 <p className="font-mono text-xs text-muted">
                   {r.role} · {r.org}
