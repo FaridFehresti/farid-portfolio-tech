@@ -59,7 +59,14 @@ function WireCore({ reduced }: { reduced: boolean }) {
   return (
     <mesh ref={ref} scale={2.3}>
       <icosahedronGeometry args={[1, 1]} />
-      <meshBasicMaterial color="#ff2233" wireframe transparent opacity={0.1} />
+      <meshBasicMaterial
+        color="#ff3b4a"
+        wireframe
+        transparent
+        opacity={0.32}
+        blending={THREE.AdditiveBlending}
+        depthWrite={false}
+      />
     </mesh>
   );
 }

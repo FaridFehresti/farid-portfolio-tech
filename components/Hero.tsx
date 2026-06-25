@@ -49,7 +49,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 pt-24 pb-16 text-center"
     >
       {/* Ambient 3D particle field (lazy, client-only, decorative) */}
-      <div className="pointer-events-none absolute inset-0 -z-0 opacity-70">
+      <div className="pointer-events-none absolute inset-0 -z-0 opacity-90">
         <HeroParticles />
       </div>
 
