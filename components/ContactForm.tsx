@@ -6,7 +6,7 @@ import type { UIStrings } from "@/lib/i18n";
 type Status = "idle" | "sending" | "success" | "error";
 
 const inputClass =
-  "w-full rounded-lg border border-border bg-panel/60 px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted/40 focus:border-red/50";
+  "w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted/50 hover:border-white/25 focus:border-red/60 focus:bg-white/[0.06] focus:shadow-[0_0_0_3px_rgba(255,34,51,0.12)]";
 
 export function ContactForm({
   t,

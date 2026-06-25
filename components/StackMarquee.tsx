@@ -2,10 +2,10 @@ import type { CSSProperties } from "react";
 import type { SkillGroup } from "@/lib/resume";
 
 const ROWS: { dur: string; dir: "normal" | "reverse" }[] = [
-  { dur: "38s", dir: "normal" },
-  { dur: "54s", dir: "reverse" },
-  { dur: "44s", dir: "normal" },
-  { dur: "62s", dir: "reverse" },
+  { dur: "85s", dir: "normal" },
+  { dur: "115s", dir: "reverse" },
+  { dur: "95s", dir: "normal" },
+  { dur: "130s", dir: "reverse" },
 ];
 
 /** Four auto-scrolling rows cycling through the full tech stack. */

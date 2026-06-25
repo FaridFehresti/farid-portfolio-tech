@@ -15,12 +15,30 @@ export function Skills({ dict }: { dict: Dictionary }) {
         />
       </div>
 
-      {/* Full-bleed auto-scrolling stack */}
+      {/* Full-bleed auto-scrolling stack widget */}
       <Reveal>
         <StackMarquee groups={skillGroups} />
       </Reveal>
 
+      {/* Categorised stack */}
       <div className="mx-auto mt-14 grid max-w-6xl gap-5 px-5 md:grid-cols-2 md:px-8">
+        {skillGroups.map((group, i) => (
+          <Reveal key={group.title} delay={(i % 2) * 80} className="card group p-6">
+            <h3 className="font-heading text-base font-semibold uppercase tracking-wider text-red-bright">
+              {group.title}
+            </h3>
+            <div className="mt-4 flex flex-wrap gap-1.5" dir="ltr">
+              {group.items.map((item) => (
+                <span key={item} className="chip">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </Reveal>
+        ))}
+      </div>
+
+      <div className="mx-auto mt-5 grid max-w-6xl gap-5 px-5 md:grid-cols-2 md:px-8">
         <Reveal className="card p-6">
           <h3 className="font-heading text-base font-semibold uppercase tracking-wider text-red-bright">
             {ui.skills.languages}
