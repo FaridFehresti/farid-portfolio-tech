@@ -37,6 +37,16 @@ export type UIStrings = {
     download: string;
     references: string;
     refereeNote: string;
+    form: {
+      heading: string;
+      name: string;
+      email: string;
+      message: string;
+      send: string;
+      sending: string;
+      success: string;
+      error: string;
+    };
   };
   footer: { github: string; twitter: string; email: string };
   skipToContent: string;
@@ -74,6 +84,16 @@ const ui: Record<Locale, UIStrings> = {
       download: "Download Full Resume (PDF)",
       references: "References",
       refereeNote: "Referee contact details available on request.",
+      form: {
+        heading: "Send a message",
+        name: "Name",
+        email: "Email",
+        message: "Message",
+        send: "Send Message",
+        sending: "Sending…",
+        success: "Thanks — your message was sent. I'll get back to you soon.",
+        error: "Something went wrong. Please try again, or email me directly.",
+      },
     },
     footer: { github: "GitHub", twitter: "Twitter", email: "Email" },
     skipToContent: "Skip to content",
@@ -109,6 +129,16 @@ const ui: Record<Locale, UIStrings> = {
       download: "دانلود رزومه‌ی کامل (PDF)",
       references: "معرف‌ها",
       refereeNote: "اطلاعات تماس معرف‌ها در صورت درخواست ارائه می‌شود.",
+      form: {
+        heading: "ارسال پیام",
+        name: "نام",
+        email: "ایمیل",
+        message: "پیام",
+        send: "ارسال پیام",
+        sending: "در حال ارسال…",
+        success: "ممنون — پیام شما ارسال شد. به‌زودی پاسخ می‌دهم.",
+        error: "مشکلی پیش آمد. لطفاً دوباره تلاش کنید یا مستقیماً ایمیل بزنید.",
+      },
     },
     footer: { github: "گیت‌هاب", twitter: "توییتر", email: "ایمیل" },
     skipToContent: "رفتن به محتوا",

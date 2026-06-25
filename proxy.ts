@@ -34,8 +34,9 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Run on everything except Next internals, static assets and metadata routes.
+  // Run on everything except API routes, Next internals, static assets and
+  // metadata routes.
   matcher: [
-    "/((?!_next/|favicon.ico|sitemap.xml|robots.txt|manifest.webmanifest|.*\\.[\\w]+$).*)",
+    "/((?!api/|_next/|favicon.ico|sitemap.xml|robots.txt|manifest.webmanifest|.*\\.[\\w]+$).*)",
   ],
 };
