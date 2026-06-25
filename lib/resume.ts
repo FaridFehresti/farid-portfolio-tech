@@ -16,6 +16,7 @@ export type Project = {
   display?: string; // shown link label when url differs / is partial
   stack: string[];
   description: string;
+  cover?: string; // optional cover image in /public (locale-invariant)
 };
 
 export type SkillGroup = {
@@ -102,6 +103,7 @@ export const projects: Project[] = [
     tagline: "International Forex & CFD Broker",
     url: "https://mondfx.com",
     display: "mondfx.com",
+    cover: "/projects/mondfx.webp",
     stack: ["React", "TypeScript", "RxJS", "TailwindCSS", "Real-time"],
     description:
       "International brokerage platform with 350+ trading instruments (Forex, crypto, gold, indices), leverage up to 1:500 and spreads from 0.0. Winner of Best Broker 2025 at Forex Expo Dubai & Money Expo India.",
@@ -111,6 +113,7 @@ export const projects: Project[] = [
     tagline: "Persian Prop Trading Platform",
     url: "https://fenefx.com",
     display: "fenefx.com",
+    cover: "/projects/fenefx.webp",
     stack: ["Next.js", "TypeScript", "TailwindCSS", "Material-UI"],
     description:
       "Persian-language prop trading platform with a challenge purchase system, trader panel, educational academy and 24-hour support. Built for Iranian traders.",
@@ -120,6 +123,7 @@ export const projects: Project[] = [
     tagline: "Digital NFC Card Platform",
     url: "https://onetapcard.uk",
     display: "onetapcard.uk",
+    cover: "/projects/onetapcard.webp",
     stack: ["Next.js", "NestJS", "PostgreSQL", "HubSpot API", "Zapier"],
     description:
       "End-to-end NFC card platform: ordering flow, management panel, HubSpot & Zapier integration and a subscription system. Deployed on Nginx + Linux.",
@@ -155,6 +159,7 @@ export const projects: Project[] = [
     name: "BestInform",
     tagline: "International Travel Booking",
     display: "eu.bestinform",
+    cover: "/projects/bestinform.webp",
     stack: ["Angular", "Angular Material", "RxJS", "NgRx", "Sass"],
     description:
       "Led a team of three freelancers to fully build the admin panel and user interface from Figma designs.",

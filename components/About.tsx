@@ -1,11 +1,13 @@
-import { profile, stats } from "@/lib/resume";
+import type { Dictionary } from "@/lib/i18n";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal } from "./Reveal";
+import { Counter } from "./Counter";
 
-export function About() {
+export function About({ dict }: { dict: Dictionary }) {
+  const { profile, stats, ui } = dict;
   return (
     <section id="about" className="mx-auto max-w-6xl px-5 py-24 md:px-8 md:py-32">
-      <SectionHeading index="01" kicker="Who I am" title="About" />
+      <SectionHeading index="01" kicker={ui.sections.about.kicker} title={ui.sections.about.title} />
 
       <div className="grid gap-12 md:grid-cols-[1.4fr_1fr] md:gap-16">
         <Reveal>
@@ -13,16 +15,20 @@ export function About() {
             {profile.summary}
           </p>
           <p className="mt-6 font-heading text-base uppercase tracking-wide text-red-bright neon-soft">
-            Code should solve real problems — not just run.
+            {ui.about.line}
           </p>
         </Reveal>
 
         <Reveal delay={120} className="grid grid-cols-2 gap-4 self-start">
-          {stats.map((s) => (
-            <div key={s.label} className="tech-card p-5">
-              <p className="font-display text-3xl font-black text-red-bright neon-soft md:text-4xl">
-                {s.value}
-              </p>
+          {stats.map((s, i) => (
+            <div key={s.label} className="hud-card group p-5">
+              <span className="font-mono text-[0.6rem] tracking-widest text-red/70">
+                {`_${String(i + 1).padStart(2, "0")}`}
+              </span>
+              <Counter
+                value={s.value}
+                className="font-display mt-1 block text-3xl font-black text-red-bright neon-soft md:text-4xl"
+              />
               <p className="mt-2 text-xs leading-snug text-muted">{s.label}</p>
             </div>
           ))}

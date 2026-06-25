@@ -1,6 +1,7 @@
-import { profile, contact } from "@/lib/resume";
+import type { Dictionary } from "@/lib/i18n";
 
-export function Footer() {
+export function Footer({ dict }: { dict: Dictionary }) {
+  const { profile, contact, ui } = dict;
   return (
     <footer className="border-t border-border">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-5 py-12 text-center md:flex-row md:justify-between md:text-left md:px-8">
@@ -14,7 +15,10 @@ export function Footer() {
             className="h-9 w-9 object-contain drop-shadow-[0_0_8px_rgba(255,34,51,0.6)]"
           />
           <div>
-            <p className="font-display text-sm font-bold tracking-widest text-foreground">
+            <p
+              className="brand-latin font-display text-sm font-bold tracking-widest text-foreground"
+              dir="ltr"
+            >
               {profile.brand}
             </p>
             <p className="font-mono text-[0.7rem] text-muted">{profile.name}</p>
@@ -28,7 +32,7 @@ export function Footer() {
             rel="noopener noreferrer"
             className="hover:text-red-bright"
           >
-            GitHub
+            {ui.footer.github}
           </a>
           <a
             href={contact.twitter}
@@ -36,14 +40,14 @@ export function Footer() {
             rel="noopener noreferrer"
             className="hover:text-red-bright"
           >
-            Twitter
+            {ui.footer.twitter}
           </a>
           <a href={`mailto:${contact.email}`} className="hover:text-red-bright">
-            Email
+            {ui.footer.email}
           </a>
         </div>
 
-        <p className="font-mono text-[0.7rem] text-muted/70">
+        <p className="font-mono text-[0.7rem] text-muted/70" dir="ltr">
           © {new Date().getFullYear()} {profile.name}
         </p>
       </div>

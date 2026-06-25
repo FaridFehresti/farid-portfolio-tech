@@ -1,25 +1,29 @@
-import { contact, references } from "@/lib/resume";
+import type { Dictionary } from "@/lib/i18n";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal } from "./Reveal";
+import { MagneticButton } from "./MagneticButton";
 
-const channels = [
-  { label: "Email", value: contact.email, href: `mailto:${contact.email}` },
-  { label: "GitHub", value: contact.githubLabel, href: contact.github },
-  { label: "Twitter / X", value: contact.twitterLabel, href: contact.twitter },
-  { label: "Location", value: contact.location, href: undefined },
-];
+export function Contact({ dict }: { dict: Dictionary }) {
+  const { contact, references, ui } = dict;
 
-export function Contact() {
+  const channels = [
+    { label: ui.contact.channels.email, value: contact.email, href: `mailto:${contact.email}`, ltr: true },
+    { label: ui.contact.channels.github, value: contact.githubLabel, href: contact.github, ltr: true },
+    { label: ui.contact.channels.twitter, value: contact.twitterLabel, href: contact.twitter, ltr: true },
+    { label: ui.contact.channels.location, value: contact.location, href: undefined, ltr: false },
+  ];
+
   return (
     <section id="contact" className="mx-auto max-w-6xl px-5 py-24 md:px-8 md:py-32">
-      <SectionHeading index="05" kicker="Let's talk" title="Contact" />
+      <SectionHeading
+        index="05"
+        kicker={ui.sections.contact.kicker}
+        title={ui.sections.contact.title}
+      />
 
       <div className="grid gap-12 md:grid-cols-[1.2fr_1fr] md:gap-16">
         <Reveal>
-          <p className="text-lg leading-relaxed text-foreground/90">
-            Open to full-stack, technical-lead and AI-integration work. The
-            fastest way to reach me:
-          </p>
+          <p className="text-lg leading-relaxed text-foreground/90">{ui.contact.intro}</p>
 
           <ul className="mt-7 divide-y divide-border border-y border-border">
             {channels.map((c) => (
@@ -30,6 +34,7 @@ export function Contact() {
                 {c.href ? (
                   <a
                     href={c.href}
+                    dir={c.ltr ? "ltr" : undefined}
                     target={c.href.startsWith("http") ? "_blank" : undefined}
                     rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="text-sm text-foreground transition-colors hover:text-red-bright"
@@ -43,23 +48,23 @@ export function Contact() {
             ))}
           </ul>
 
-          <a
+          <MagneticButton
             href="/resume-farid.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-block rounded-full border border-red/60 bg-red/10 px-7 py-3 font-mono text-xs uppercase tracking-widest text-red-bright transition-all hover:bg-red/20 hover:shadow-[0_0_24px_-4px_rgba(255,34,51,0.7)]"
+            external
+            className="mt-8 inline-block rounded-full border border-red/60 bg-red/10 px-7 py-3 font-mono text-xs uppercase tracking-widest text-red-bright transition-colors hover:bg-red/20 hover:shadow-[0_0_24px_-4px_rgba(255,34,51,0.7)]"
           >
-            Download Full Resume (PDF) ↓
-          </a>
+            {ui.contact.download} ↓
+          </MagneticButton>
         </Reveal>
 
         <Reveal delay={120} className="self-start">
           <h3 className="font-heading text-base font-semibold uppercase tracking-wider text-red-bright">
-            References
+            <span className="font-mono text-muted/50">// </span>
+            {ui.contact.references}
           </h3>
           <div className="mt-4 space-y-3">
             {references.map((r) => (
-              <div key={r.name} className="tech-card p-4">
+              <div key={r.name} className="hud-card group p-4">
                 <p className="text-sm font-medium text-foreground">{r.name}</p>
                 <p className="font-mono text-xs text-muted">
                   {r.role} · {r.org}
@@ -67,7 +72,7 @@ export function Contact() {
               </div>
             ))}
             <p className="font-mono text-[0.7rem] tracking-wide text-muted/70">
-              Referee contact details available on request.
+              {ui.contact.refereeNote}
             </p>
           </div>
         </Reveal>

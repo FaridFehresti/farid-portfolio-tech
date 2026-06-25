@@ -1,19 +1,25 @@
-import { skillGroups, languages, education } from "@/lib/resume";
+import type { Dictionary } from "@/lib/i18n";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal } from "./Reveal";
 
-export function Skills() {
+export function Skills({ dict }: { dict: Dictionary }) {
+  const { skillGroups, languages, education, ui } = dict;
   return (
     <section id="skills" className="mx-auto max-w-6xl px-5 py-24 md:px-8 md:py-32">
-      <SectionHeading index="04" kicker="What I work with" title="Skills" />
+      <SectionHeading
+        index="04"
+        kicker={ui.sections.skills.kicker}
+        title={ui.sections.skills.title}
+      />
 
       <div className="grid gap-5 md:grid-cols-2">
         {skillGroups.map((group, i) => (
-          <Reveal key={group.title} delay={(i % 2) * 80} className="tech-card p-6">
+          <Reveal key={group.title} delay={(i % 2) * 80} className="hud-card group p-6">
             <h3 className="font-heading text-base font-semibold uppercase tracking-wider text-red-bright">
+              <span className="font-mono text-muted/50">// </span>
               {group.title}
             </h3>
-            <div className="mt-4 flex flex-wrap gap-1.5">
+            <div className="mt-4 flex flex-wrap gap-1.5" dir="ltr">
               {group.items.map((item) => (
                 <span key={item} className="chip">
                   {item}
@@ -25,9 +31,10 @@ export function Skills() {
       </div>
 
       <div className="mt-5 grid gap-5 md:grid-cols-2">
-        <Reveal className="tech-card p-6">
+        <Reveal className="hud-card group p-6">
           <h3 className="font-heading text-base font-semibold uppercase tracking-wider text-red-bright">
-            Languages
+            <span className="font-mono text-muted/50">// </span>
+            {ui.skills.languages}
           </h3>
           <ul className="mt-4 space-y-2.5">
             {languages.map((l) => (
@@ -39,9 +46,10 @@ export function Skills() {
           </ul>
         </Reveal>
 
-        <Reveal delay={80} className="tech-card p-6">
+        <Reveal delay={80} className="hud-card group p-6">
           <h3 className="font-heading text-base font-semibold uppercase tracking-wider text-red-bright">
-            Education
+            <span className="font-mono text-muted/50">// </span>
+            {ui.skills.education}
           </h3>
           <ul className="mt-4 space-y-3">
             {education.map((e) => (

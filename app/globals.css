@@ -80,6 +80,34 @@ body::after {
   color: #fff;
 }
 
+/* Keyboard focus ring ------------------------------------------------------ */
+:focus-visible {
+  outline: 2px solid var(--red-bright);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Skip-to-content link (visible only when focused) ------------------------- */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 34, 51, 0.5);
+  background: var(--panel);
+  color: var(--red-bright);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  transform: translateY(-160%);
+  transition: transform 0.2s ease;
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 /* Scrollbar ---------------------------------------------------------------- */
 ::-webkit-scrollbar {
   width: 10px;
@@ -104,6 +132,13 @@ body::after {
   font-family: var(--font-mono), ui-monospace, monospace;
 }
 
+/* Soft-crop the baked-in wordmark off the combined logo PNG, keeping the
+   skull and its glow. The brand name is rendered as real text instead. */
+.logo-skull {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 69%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 69%);
+}
+
 .neon {
   color: var(--red-bright);
   text-shadow:
@@ -125,36 +160,88 @@ body::after {
     inset 0 0 40px rgba(255, 34, 51, 0.06);
 }
 
-/* Section card with animated edge glow on hover */
-.tech-card {
-  position: relative;
-  background: linear-gradient(160deg, var(--panel) 0%, var(--panel-2) 100%);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  transition:
-    transform 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-}
-.tech-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 34, 51, 0.5);
-  box-shadow:
-    0 0 0 1px rgba(255, 34, 51, 0.25),
-    0 10px 40px -12px rgba(255, 34, 51, 0.45);
-}
 
+/* Squared HUD tag (was a rounded pill) ------------------------------------- */
 .chip {
   display: inline-flex;
   align-items: center;
+  gap: 0.35rem;
   font-family: var(--font-mono), monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.03em;
-  padding: 0.22rem 0.6rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 34, 51, 0.28);
-  background: rgba(255, 34, 51, 0.06);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 34, 51, 0.22);
+  background: rgba(255, 34, 51, 0.05);
   color: #ffb3ba;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+.chip::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  background: var(--red);
+  box-shadow: 0 0 5px var(--red);
+}
+.group:hover .chip,
+.chip:hover {
+  border-color: rgba(255, 34, 51, 0.45);
+  background: rgba(255, 34, 51, 0.09);
+}
+
+/* ---- HUD card: bracketed, near-square, terminal panel ------------------- */
+.hud-card {
+  position: relative;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.014) 0px,
+      rgba(255, 255, 255, 0.014) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    linear-gradient(160deg, var(--panel) 0%, var(--panel-2) 100%);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.hud-card::before,
+.hud-card::after {
+  content: "";
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-color: var(--red);
+  opacity: 0.45;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.hud-card::before {
+  top: 6px;
+  left: 6px;
+  border-top: 1.5px solid;
+  border-left: 1.5px solid;
+}
+.hud-card::after {
+  right: 6px;
+  bottom: 6px;
+  border-right: 1.5px solid;
+  border-bottom: 1.5px solid;
+}
+.hud-card:hover {
+  border-color: rgba(255, 34, 51, 0.4);
+  box-shadow: 0 12px 44px -16px rgba(255, 34, 51, 0.5);
+}
+.hud-card:hover::before,
+.hud-card:hover::after,
+.group:hover.hud-card::before,
+.group:hover.hud-card::after {
+  opacity: 1;
 }
 
 .divider-glow {
@@ -165,6 +252,45 @@ body::after {
     rgba(255, 34, 51, 0.6),
     transparent
   );
+}
+
+/* Magnetic CTA — eased translate set inline by JS ------------------------- */
+.magnetic {
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+/* 3D tilt card — perspective transform set inline by JS ------------------- */
+.tilt-wrap {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    260px circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(255, 77, 94, 0.16),
+    transparent 60%
+  );
+}
+.tilt-wrap:hover .tilt-glare {
+  opacity: 1;
+}
+
+/* Nav scroll-progress bar — scaleX set inline by JS ----------------------- */
+.nav-progress {
+  transition: transform 0.1s linear;
+  box-shadow: 0 0 10px rgba(255, 34, 51, 0.6);
 }
 
 /* Scroll-reveal: hidden -> shown via IntersectionObserver toggling .is-in */
@@ -227,6 +353,29 @@ body::after {
   animation: flicker 5s linear infinite;
 }
 
+/* ---- Persian / RTL --------------------------------------------------------
+   Vazirmatn renders Persian; the Latin display/mono fonts can't. Letter-spacing
+   breaks Arabic-script shaping, so it's neutralised in RTL (Latin runs that
+   need spacing are marked dir="ltr" in the markup). */
+[dir="rtl"] body {
+  font-family: var(--font-vazir), Tahoma, "Segoe UI", sans-serif;
+}
+[dir="rtl"] .font-display,
+[dir="rtl"] .font-heading {
+  font-family: var(--font-vazir), sans-serif;
+}
+[dir="rtl"] .font-mono {
+  font-family: var(--font-mono), var(--font-vazir), ui-monospace, monospace;
+}
+[dir="rtl"] * {
+  letter-spacing: normal;
+}
+/* Keep the brand wordmark in its cyber display face even in RTL. */
+[dir="rtl"] .brand-latin {
+  font-family: var(--font-orbitron), var(--font-display), sans-serif;
+  letter-spacing: 0.12em;
+}
+
 /* Respect reduced motion --------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -241,5 +390,10 @@ body::after {
   .animate-float,
   .animate-flicker {
     animation: none;
+  }
+  .magnetic,
+  .tilt-wrap {
+    transition: none;
+    transform: none !important;
   }
 }
