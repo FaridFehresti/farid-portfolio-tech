@@ -46,6 +46,12 @@ export type UIStrings = {
       sending: string;
       success: string;
       error: string;
+      validation: {
+        nameRequired: string;
+        emailRequired: string;
+        emailInvalid: string;
+        messageRequired: string;
+      };
     };
   };
   footer: { github: string; twitter: string; email: string };
@@ -79,7 +85,7 @@ const ui: Record<Locale, UIStrings> = {
     skills: { languages: "Languages", education: "Education" },
     contact: {
       intro:
-        "Open to full-stack, technical-lead and AI-integration work. The fastest way to reach me:",
+        "Open to FinTech UI architecture and AI workflow automation projects. The fastest way to reach me:",
       channels: { email: "Email", github: "GitHub", twitter: "Twitter / X", location: "Location" },
       download: "Download Full Resume (PDF)",
       references: "References",
@@ -93,6 +99,12 @@ const ui: Record<Locale, UIStrings> = {
         sending: "Sending…",
         success: "Thanks — your message was sent. I'll get back to you soon.",
         error: "Something went wrong. Please try again, or email me directly.",
+        validation: {
+          nameRequired: "Name is required",
+          emailRequired: "Email is required",
+          emailInvalid: "Please enter a valid email address",
+          messageRequired: "Message is required",
+        },
       },
     },
     footer: { github: "GitHub", twitter: "Twitter", email: "Email" },
@@ -124,7 +136,7 @@ const ui: Record<Locale, UIStrings> = {
     skills: { languages: "زبان‌ها", education: "تحصیلات و دوره‌ها" },
     contact: {
       intro:
-        "آماده‌ی همکاری در حوزه‌ی فول‌استک، سرپرستی فنی و یکپارچه‌سازی هوش مصنوعی هستم. سریع‌ترین راه ارتباط با من:",
+        "آماده‌ی همکاری در پروژه‌های معماری رابط کاربری FinTech و اتوماسیون جریان کاری هوش مصنوعی هستم. سریع‌ترین راه ارتباط با من:",
       channels: { email: "ایمیل", github: "گیت‌هاب", twitter: "توییتر / X", location: "موقعیت" },
       download: "دانلود رزومه‌ی کامل (PDF)",
       references: "معرف‌ها",
@@ -138,6 +150,12 @@ const ui: Record<Locale, UIStrings> = {
         sending: "در حال ارسال…",
         success: "ممنون — پیام شما ارسال شد. به‌زودی پاسخ می‌دهم.",
         error: "مشکلی پیش آمد. لطفاً دوباره تلاش کنید یا مستقیماً ایمیل بزنید.",
+        validation: {
+          nameRequired: "نام الزامی است",
+          emailRequired: "ایمیل الزامی است",
+          emailInvalid: "لطفاً یک ایمیل معتبر وارد کنید",
+          messageRequired: "پیام الزامی است",
+        },
       },
     },
     footer: { github: "گیت‌هاب", twitter: "توییتر", email: "ایمیل" },

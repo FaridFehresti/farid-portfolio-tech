@@ -50,15 +50,26 @@ body {
 }
 
 /* Ambient red glows + circuit grid behind everything ----------------------- */
+@keyframes grid-glow-flow {
+  0% {
+    background-position: 0% 0%;
+    mask-position: 0px 0px, 0px 0px;
+    -webkit-mask-position: 0px 0px, 0px 0px;
+  }
+  100% {
+    background-position: 0% 200%;
+    mask-position: 0px 48px, 0px 48px;
+    -webkit-mask-position: 0px 48px, 0px 48px;
+  }
+}
+
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -2;
-  background:
-    radial-gradient(60% 50% at 50% -5%, rgba(255, 34, 51, 0.18), transparent 60%),
-    radial-gradient(45% 45% at 100% 100%, rgba(225, 6, 0, 0.12), transparent 60%),
-    radial-gradient(40% 40% at 0% 60%, rgba(255, 77, 94, 0.08), transparent 60%);
+  /* Reduced ambient space glow so the background remains mostly dark */
+  background: radial-gradient(60% 50% at 50% -5%, rgba(255, 34, 51, 0.08), transparent 60%);
   pointer-events: none;
 }
 
@@ -67,11 +78,30 @@ body::after {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-image:
-    linear-gradient(rgba(255, 34, 51, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 34, 51, 0.05) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, #000 30%, transparent 80%);
+  
+  /* The very subtle crimson gradient that flows */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 34, 51, 0.0) 0%,
+    rgba(255, 34, 51, 0.04) 30%,
+    rgba(255, 34, 51, 0.15) 50%,
+    rgba(255, 34, 51, 0.04) 70%,
+    rgba(255, 34, 51, 0.0) 100%
+  );
+  background-size: 100% 200%;
+
+  /* The mask ensures the heavy crimson gradient ONLY paints the grid lines */
+  -webkit-mask-image:
+    linear-gradient(#000 1.5px, transparent 1.5px),
+    linear-gradient(90deg, #000 1.5px, transparent 1.5px);
+  mask-image:
+    linear-gradient(#000 1.5px, transparent 1.5px),
+    linear-gradient(90deg, #000 1.5px, transparent 1.5px);
+    
+  -webkit-mask-size: 48px 48px;
+  mask-size: 48px 48px;
+
+  animation: grid-glow-flow 18s linear infinite;
   pointer-events: none;
 }
 

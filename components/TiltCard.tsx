@@ -10,18 +10,20 @@ type TiltCardProps = {
   className?: string;
   /** Optional full-bleed banner rendered above the padded content. */
   cover?: ReactNode;
+  /** Disables tilt and hover effects. */
+  disabled?: boolean;
 };
 
 /**
  * Wraps a HUD card in a perspective container that tilts toward the cursor
  * and tracks a soft radial glare. Pointer devices only; respects reduced motion.
  */
-export function TiltCard({ children, href, external, className = "", cover }: TiltCardProps) {
+export function TiltCard({ children, href, external, className = "", cover, disabled }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
 
   function onMove(e: PointerEvent<HTMLDivElement>) {
-    if (reduced || e.pointerType === "touch") return;
+    if (reduced || disabled || e.pointerType === "touch") return;
     const el = ref.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
@@ -36,7 +38,7 @@ export function TiltCard({ children, href, external, className = "", cover }: Ti
     if (ref.current) ref.current.style.transform = "";
   }
 
-  const cardClass = `card group relative flex h-full flex-col overflow-hidden ${className}`;
+  const cardClass = `card ${disabled ? "" : "group"} relative flex h-full flex-col overflow-hidden ${className}`;
   const content = (
     <>
       <span className="tilt-glare" aria-hidden />

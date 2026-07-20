@@ -5,27 +5,40 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 
-/** Ambient dust: points scattered through a spherical shell. */
+/** Ambient data streams: points flowing upward through space. */
 function ParticleField({ count, reduced }: { count: number; reduced: boolean }) {
   const ref = useRef<THREE.Points>(null);
 
   const positions = useMemo(() => {
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      const r = 1.4 + Math.random() * 2.1;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
-      arr[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      arr[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      arr[i * 3 + 2] = r * Math.cos(phi);
+      // Scatter in a wide cylinder
+      const radius = Math.random() * 4;
+      const angle = Math.random() * Math.PI * 2;
+      arr[i * 3] = radius * Math.cos(angle);
+      arr[i * 3 + 1] = (Math.random() - 0.5) * 10; // Y from -5 to 5
+      arr[i * 3 + 2] = radius * Math.sin(angle);
     }
     return arr;
   }, [count]);
 
   useFrame((_, delta) => {
     if (reduced || !ref.current) return;
-    ref.current.rotation.y += delta * 0.04;
-    ref.current.rotation.x += delta * 0.012;
+    
+    // Smooth rotation of the whole field
+    ref.current.rotation.y += delta * 0.02;
+
+    // Upward flow for each particle
+    const posAttribute = ref.current.geometry.attributes.position;
+    const array = posAttribute.array as Float32Array;
+    
+    for (let i = 0; i < count; i++) {
+      array[i * 3 + 1] += delta * (0.1 + Math.random() * 0.1); // Move Y up at slight random speeds
+      if (array[i * 3 + 1] > 5) {
+        array[i * 3 + 1] = -5; // Loop back to bottom
+      }
+    }
+    posAttribute.needsUpdate = true;
   });
 
   return (
@@ -34,10 +47,10 @@ function ParticleField({ count, reduced }: { count: number; reduced: boolean }) 
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.02}
-        color="#ff4d5e"
+        size={0.015}
+        color="#ff2233"
         transparent
-        opacity={0.9}
+        opacity={0.8}
         sizeAttenuation
         depthWrite={false}
         blending={THREE.AdditiveBlending}
@@ -46,28 +59,50 @@ function ParticleField({ count, reduced }: { count: number; reduced: boolean }) 
   );
 }
 
-/** Slow-drifting wireframe core that sits far behind the logo. */
-function WireCore({ reduced }: { reduced: boolean }) {
-  const ref = useRef<THREE.Mesh>(null);
+/** High-tech intersecting orbital rings to match the SVG logo network rings. */
+function OrbitalRings({ reduced }: { reduced: boolean }) {
+  const ref1 = useRef<THREE.Mesh>(null);
+  const ref2 = useRef<THREE.Mesh>(null);
+  const ref3 = useRef<THREE.Mesh>(null);
 
   useFrame((_, delta) => {
-    if (reduced || !ref.current) return;
-    ref.current.rotation.y -= delta * 0.05;
-    ref.current.rotation.z += delta * 0.02;
+    if (reduced) return;
+    if (ref1.current) {
+      ref1.current.rotation.x += delta * 0.15;
+      ref1.current.rotation.y += delta * 0.1;
+    }
+    if (ref2.current) {
+      ref2.current.rotation.x -= delta * 0.1;
+      ref2.current.rotation.z += delta * 0.15;
+    }
+    if (ref3.current) {
+      ref3.current.rotation.y += delta * 0.2;
+      ref3.current.rotation.z -= delta * 0.1;
+    }
   });
 
+  const matProps = {
+    color: "#ff2233",
+    transparent: true,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  };
+
   return (
-    <mesh ref={ref} scale={2.3}>
-      <icosahedronGeometry args={[1, 1]} />
-      <meshBasicMaterial
-        color="#ff3b4a"
-        wireframe
-        transparent
-        opacity={0.32}
-        blending={THREE.AdditiveBlending}
-        depthWrite={false}
-      />
-    </mesh>
+    <group scale={1.8}>
+      <mesh ref={ref1}>
+        <torusGeometry args={[1.5, 0.005, 16, 64]} />
+        <meshBasicMaterial {...matProps} opacity={0.4} />
+      </mesh>
+      <mesh ref={ref2} rotation={[Math.PI / 3, 0, 0]}>
+        <torusGeometry args={[1.2, 0.005, 16, 64]} />
+        <meshBasicMaterial {...matProps} opacity={0.6} />
+      </mesh>
+      <mesh ref={ref3} rotation={[0, Math.PI / 4, 0]}>
+        <torusGeometry args={[0.9, 0.008, 16, 64]} />
+        <meshBasicMaterial {...matProps} opacity={0.8} />
+      </mesh>
+    </group>
   );
 }
 
@@ -83,7 +118,7 @@ function Scene({ count, reduced }: { count: number; reduced: boolean }) {
 
   return (
     <group ref={group}>
-      <WireCore reduced={reduced} />
+      <OrbitalRings reduced={reduced} />
       <ParticleField count={count} reduced={reduced} />
     </group>
   );
@@ -91,10 +126,10 @@ function Scene({ count, reduced }: { count: number; reduced: boolean }) {
 
 export function HeroParticles() {
   const reduced = useReducedMotion();
-  const [count, setCount] = useState(2400);
+  const [count, setCount] = useState(1500);
 
   useEffect(() => {
-    setCount(window.innerWidth < 768 ? 1100 : 2400);
+    setCount(window.innerWidth < 768 ? 600 : 1500);
   }, []);
 
   return (
@@ -110,3 +145,4 @@ export function HeroParticles() {
     </Canvas>
   );
 }
+

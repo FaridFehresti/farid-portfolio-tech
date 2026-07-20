@@ -58,7 +58,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
         <div data-hero className="animate-float">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logo-skull.webp"
+            src="/logo.svg"
             alt={`${profile.brand} logo`}
             width={640}
             height={682}

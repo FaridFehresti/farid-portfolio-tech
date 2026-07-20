@@ -70,7 +70,7 @@ export function Nav({ dict }: { dict: Dictionary }) {
         <a href="#top" className="flex items-center gap-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logo.png"
+            src="/logo.svg"
             alt=""
             width={34}
             height={34}

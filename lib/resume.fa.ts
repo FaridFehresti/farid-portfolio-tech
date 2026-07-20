@@ -5,11 +5,11 @@ import type { Experience, Project, SkillGroup, Reference } from "./resume";
 export const profile = {
   name: "فرید فهرستی",
   brand: "FARIDTECH",
-  title: "توسعه‌دهنده فول‌استک · سرپرست فنی · یکپارچه‌سازی هوش مصنوعی",
+  title: "مهندس رابط کاربری پرفورمنس‌بالا برای FinTech · معمار جریان کاری هوش مصنوعی",
   tagline:
-    "محصولاتی می‌سازم که درآمد ایجاد می‌کنند و در محیط واقعی باقی می‌مانند — از سیستم‌های فروش CRM تا پلتفرم‌های سازمانی بین‌المللی.",
+    "طراحی داشبوردهای معاملاتی با تأخیر پایین و ساخت اتوماسیون‌های امن بر بستر PostgreSQL برای کاهش عملیات دستی.",
   summary:
-    "بیش از پنج سال تجربه‌ی کار روی پروژه‌هایی که مستقیماً درآمدزایی می‌کنند — از سیستم‌های فروش CRM تا پلتفرم‌های سازمانی بین‌المللی. آنچه همیشه برایم مهم بوده این است که کدی که می‌نویسم یک مشکل واقعی را حل کند، نه اینکه فقط اجرا شود. تیم رهبری کرده‌ام، مستقیماً کدنویسی کرده‌ام و محصولاتی ساخته‌ام که امروز هم در حال استفاده‌اند.",
+    "بیش از پنج سال تجربه مهندسی رابط‌های کاربری پربازده و مبتنی بر داده برای پلتفرم‌های مالی بین‌المللی و هماهنگ‌سازی جریان‌های کاری خودکار هوش مصنوعی. تخصص من در مدیریت استیت‌های پیچیده (RxJS/NgRx/Zustand) برای برنامه‌های بلادرنگ و ساخت معماری‌های مقیاس‌پذیر API (n8n/NestJS) است که مستقیماً باعث افزایش درآمد و بهره‌وری عملیاتی می‌شوند.",
 } as const;
 
 export const contact = {
@@ -23,8 +23,8 @@ export const contact = {
 } as const;
 
 export const stats: { value: string; label: string }[] = [
-  { value: "5+", label: "سال ساخت محصولات درآمدزا" },
-  { value: "10+", label: "اپلیکیشن منتشرشده در محیط واقعی" },
+  { value: "5+", label: "سال ساخت رابط کاربری معاملاتی با تأخیر پایین" },
+  { value: "10+", label: "جریان کاری خودکار و هوش مصنوعی منتشرشده" },
   { value: "4", label: "پروژه‌ی بین‌المللی تحویل‌شده" },
   { value: "2025", label: "بهترین بروکر — Forex Expo دبی" },
 ];
@@ -34,38 +34,44 @@ export const experience: Experience[] = [
     role: "توسعه‌دهنده فول‌استک",
     company: "تندیس ماندگار پردیس ایران",
     location: "تهران",
-    period: "Dec 2025 — Present",
+    period: "دی ۱۴۰۴ — اکنون",
     current: true,
+    cover: "/experience/tm.webp",
   },
   {
     role: "توسعه‌دهنده ارشد فرانت‌اند",
-    company: "MondFX و FeneFX",
+    company: "MondFX & FeneFX",
     location: "تهران",
-    period: "Jun — Nov 2024 · 4 mos",
+    period: "خرداد — آبان ۱۴۰۳ · ۴ ماه",
+    cover: "/experience/mf.webp",
   },
   {
-    role: "سرپرست تیم فرانت‌اند",
+    role: "تیم لید فرانت‌اند",
     company: "کارن سیستم",
     location: "تهران",
-    period: "Apr 2023 — Jun 2024 · 1 yr",
+    period: "اردیبهشت ۱۴۰۲ — خرداد ۱۴۰۳ · ۱ سال",
+    cover: "/experience/ks.webp",
   },
   {
     role: "توسعه‌دهنده فول‌استک (فریلنسر بین‌المللی)",
     company: "Freelancer.com",
-    location: "دورکاری",
-    period: "Dec 2023 — Jun 2024 · 5 mos",
+    location: "ریموت",
+    period: "آذر ۱۴۰۲ — خرداد ۱۴۰۳ · ۵ ماه",
+    cover: "/experience/fr.webp",
   },
   {
     role: "توسعه‌دهنده وب (فریلنس)",
-    company: "Carlancer",
+    company: "کارلنسر",
     location: "تهران",
-    period: "Aug 2022 — Dec 2023 · 1 yr 5 mos",
+    period: "مرداد ۱۴۰۱ — آذر ۱۴۰۲ · ۱ سال و ۵ ماه",
+    cover: "/experience/ca.webp",
   },
   {
     role: "برنامه‌نویس فرانت‌اند",
-    company: "نایان فناور آریا",
+    company: "نیان فناور آریا",
     location: "زنجان",
-    period: "Mar 2021 — Jul 2022 · 1 yr",
+    period: "اسفند ۱۳۹۹ — تیر ۱۴۰۱ · ۱ سال",
+    cover: "/experience/nf.webp",
   },
 ];
 
@@ -78,7 +84,7 @@ export const projects: Project[] = [
     cover: "/projects/mondfx.webp",
     stack: ["React", "TypeScript", "RxJS", "TailwindCSS", "Real-time"],
     description:
-      "پلتفرم کارگزاری بین‌المللی با بیش از 350 ابزار معاملاتی (فارکس، کریپتو، طلا، شاخص‌ها)، اهرم تا 1:500 و اسپرد از 0.0. برنده‌ی بهترین بروکر 2025 در Forex Expo دبی و Money Expo هند.",
+      "پلتفرم کارگزاری بین‌المللی با بیش از 350 ابزار معاملاتی مبتنی بر داده. مهندسی داشبوردهای معاملاتی با بازده بالا و تأخیر پایین با استفاده از مدیریت استیت پیچیده (RxJS) برای بهینه‌سازی پرفورمنس رابط کاربری در محیط‌های سنگین داده‌ای. برنده‌ی بهترین بروکر 2025 در Forex Expo دبی.",
   },
   {
     name: "FeneFX",
@@ -88,7 +94,7 @@ export const projects: Project[] = [
     cover: "/projects/fenefx.webp",
     stack: ["Next.js", "TypeScript", "TailwindCSS", "Material-UI"],
     description:
-      "پلتفرم پراپ‌تریدینگ فارسی‌زبان با سیستم خرید چالش، پنل تریدر، آکادمی آموزشی و پشتیبانی 24 ساعته. ساخته‌شده برای تریدرهای ایرانی.",
+      "طراحی رابط و تجربه کاربری پراپ‌تریدینگ با Next.js، همراه با سیستم خرید چالش، پنل تریدر و آکادمی آموزشی. تمرکز بر مدیریت یکپارچه‌ی داده‌های بلادرنگ برای تریدرهای ایرانی.",
   },
   {
     name: "OneTapCard",
@@ -98,22 +104,24 @@ export const projects: Project[] = [
     cover: "/projects/onetapcard.webp",
     stack: ["Next.js", "NestJS", "PostgreSQL", "HubSpot API", "Zapier"],
     description:
-      "پلتفرم کامل کارت NFC: فرایند سفارش، پنل مدیریت، یکپارچه‌سازی با HubSpot و Zapier و سیستم اشتراک. مستقر روی Nginx + Linux.",
+      "پلتفرم کامل کارت NFC بر بستر PostgreSQL. پیاده‌سازی دریافت‌کننده‌های وب‌هوک اختصاصی و اتوماسیون فرآیندهای تجاری از طریق HubSpot و Zapier برای کاهش عملیات دستی.",
   },
   {
     name: "House of Traders",
     tagline: "بزرگ‌ترین مسابقه‌ی تریدینگ ایران",
-    url: "https://house-of-traders.ir",
-    display: "house-of-traders.ir",
+    url: "https://ahangariholding.com/house-of-traders",
+    display: "ahangariholding.com/house-of-traders",
+    cover: "/projects/house-of-traders.webp",
     stack: ["Next.js", "NestJS", "PostgreSQL", "Payments", "Real-time"],
     description:
-      "پلتفرم رویداد استعدادیابی تریدرها: ثبت‌نام، قرعه‌کشی زنده، کیف پول کریپتو و تایمر بلادرنگ برای مسابقات فصلی.",
+      "پلتفرم امن بر بستر PostgreSQL برای رویداد استعدادیابی. ساخت یکپارچه‌سازی‌های خودکار کیف پول کریپتو و تایمرهای بلادرنگ برای مسابقات فصلی.",
   },
   {
     name: "MadTalk",
     tagline: "پلتفرم LMS سازمانی",
-    url: "https://panel.beta.madtalk.ir",
-    display: "panel.beta.madtalk.ir",
+    url: "https://madtalk.ir",
+    display: "madtalk.ir",
+    cover: "/projects/madtalk.webp",
     stack: ["Next.js", "React", "Material-UI", "Ant Design", "RxJS"],
     description:
       "رابط کاربری LMS سازمانی — ماژول‌های اصلی، پنل مدیریت و سیستم فروش دوره. از مشتریان: دانشگاه زنجان.",
@@ -123,15 +131,17 @@ export const projects: Project[] = [
     tagline: "هلدینگ خدمات مالی و سرمایه‌گذاری",
     url: "https://ahangariholding.com",
     display: "ahangariholding.com",
+    cover: "/projects/ahangariholding.webp",
     stack: ["Next.js", "TypeScript", "GSAP", "TailwindCSS"],
     description:
       "وب‌سایت یک هلدینگ با دفاتری در Business Bay دبی — خدمات مالی، دوره‌های آموزش بازار و محتوای تخصصی فارکس، همراه با انیمیشن‌های غنی GSAP.",
   },
   {
-    name: "BestInform",
+    name: "Travel Theme",
     tagline: "رزرو سفر بین‌المللی",
-    display: "eu.bestinform",
-    cover: "/projects/bestinform.webp",
+    url: "https://traveltheme.com/ro/",
+    display: "traveltheme.com",
+    cover: "/projects/traveltheme.webp",
     stack: ["Angular", "Angular Material", "RxJS", "NgRx", "Sass"],
     description:
       "رهبری تیمی سه‌نفره از فریلنسرها برای ساخت کامل پنل مدیریت و رابط کاربری از روی طرح‌های Figma.",
@@ -139,8 +149,8 @@ export const projects: Project[] = [
   {
     name: "Deadlock Tools",
     tagline: "آمار بازی‌های رقابتی",
-    url: "https://deadlocktools.com",
     display: "deadlocktools.com",
+    status: "down",
     stack: ["Angular", "NestJS", "PostgreSQL", "Nginx", "Linux"],
     description:
       "توسعه‌ی فول‌استک همراه با مدیریت زیرساخت — استقرار Nginx و گواهی‌های SSL روی سرور لینوکس.",
@@ -150,17 +160,10 @@ export const projects: Project[] = [
     tagline: "محاسبه‌ی تیونینگ خودرو",
     url: "https://tuningtech.co.uk",
     display: "tuningtech.co.uk",
+    cover: "/projects/tunningcompany.webp",
     stack: ["Next.js", "NestJS", "PostgreSQL", "Material-UI"],
     description:
       "سیستم محاسبه‌ی تأثیر ارتقای قطعات خودرو، همراه با پنل مدیریت محتوا برای ادمین‌ها.",
-  },
-  {
-    name: "Asato",
-    tagline: "پلتفرم یکپارچه‌ی بیمه",
-    display: "ir.to.asa",
-    stack: ["Angular 17", "TypeScript", "Ant Design", "RxJS"],
-    description:
-      "رابط کاربری پلتفرم بیمه و ارتقای Angular از نسخه‌ی 13 به 17 با بهینه‌سازی کامل معماری.",
   },
 ];
 

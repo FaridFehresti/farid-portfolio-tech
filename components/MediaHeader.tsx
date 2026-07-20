@@ -27,12 +27,14 @@ type MediaHeaderProps = {
   cover?: string;
   /** Small label shown in the top corner (e.g. period or "Live"). */
   badge?: ReactNode;
+  /** Aspect ratio of the header image. Defaults to 16/9. */
+  ratio?: "video" | "square";
 };
 
 /** Card media: a cover image when available, else a gradient monogram. */
-export function MediaHeader({ name, index, cover, badge }: MediaHeaderProps) {
+export function MediaHeader({ name, index, cover, badge, ratio = "video" }: MediaHeaderProps) {
   return (
-    <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border">
+    <div className={`relative w-full overflow-hidden border-b border-border ${ratio === "square" ? "aspect-square" : "aspect-[16/9]"}`}>
       {cover ? (
         <>
           {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -5,8 +5,7 @@ import type { UIStrings } from "@/lib/i18n";
 
 type Status = "idle" | "sending" | "success" | "error";
 
-const inputClass =
-  "w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted/50 hover:border-white/25 focus:border-red/60 focus:bg-white/[0.06] focus:shadow-[0_0_0_3px_rgba(255,34,51,0.12)]";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function ContactForm({
   t,
@@ -20,10 +19,28 @@ export function ContactForm({
   const [message, setMessage] = useState("");
   const [company, setCompany] = useState(""); // honeypot
   const [status, setStatus] = useState<Status>("idle");
+  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
+
+  const validate = () => {
+    const newErrors: typeof errors = {};
+    if (!name.trim()) newErrors.name = t.validation.nameRequired;
+    if (!email.trim()) {
+      newErrors.email = t.validation.emailRequired;
+    } else if (!EMAIL_RE.test(email)) {
+      newErrors.email = t.validation.emailInvalid;
+    }
+    if (!message.trim()) newErrors.message = t.validation.messageRequired;
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (status === "sending") return;
+
+    if (!validate()) return;
+
     setStatus("sending");
     try {
       const res = await fetch("/api/contact", {
@@ -37,6 +54,7 @@ export function ContactForm({
         setName("");
         setEmail("");
         setMessage("");
+        setErrors({});
       } else {
         setStatus("error");
       }
@@ -44,6 +62,13 @@ export function ContactForm({
       setStatus("error");
     }
   }
+
+  const getInputClass = (hasError: boolean) =>
+    `w-full rounded-lg border bg-white/[0.04] px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted/50 hover:bg-white/[0.06] ${
+      hasError
+        ? "border-red-500 focus:border-red-600 focus:shadow-[0_0_0_3px_rgba(255,34,51,0.2)]"
+        : "border-white/15 hover:border-white/25 focus:border-red/60 focus:shadow-[0_0_0_3px_rgba(255,34,51,0.12)]"
+    }`;
 
   return (
     <form onSubmit={onSubmit} className="space-y-4" noValidate>
@@ -68,13 +93,16 @@ export function ContactForm({
           </span>
           <input
             type="text"
-            required
             maxLength={120}
             value={name}
-            onChange={(e) => setName(e.target.value)}
-            className={inputClass}
+            onChange={(e) => {
+              setName(e.target.value);
+              if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
+            }}
+            className={getInputClass(!!errors.name)}
             autoComplete="name"
           />
+          {errors.name && <span className="mt-1 block text-xs text-red-500">{errors.name}</span>}
         </label>
         <label className="block">
           <span className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-muted">
@@ -82,14 +110,17 @@ export function ContactForm({
           </span>
           <input
             type="email"
-            required
             maxLength={200}
             dir="ltr"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={inputClass}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
+            }}
+            className={getInputClass(!!errors.email)}
             autoComplete="email"
           />
+          {errors.email && <span className="mt-1 block text-xs text-red-500">{errors.email}</span>}
         </label>
       </div>
 
@@ -98,13 +129,16 @@ export function ContactForm({
           {t.message}
         </span>
         <textarea
-          required
           rows={5}
           maxLength={4000}
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          className={`${inputClass} resize-y`}
+          onChange={(e) => {
+            setMessage(e.target.value);
+            if (errors.message) setErrors((prev) => ({ ...prev, message: undefined }));
+          }}
+          className={`${getInputClass(!!errors.message)} resize-y`}
         />
+        {errors.message && <span className="mt-1 block text-xs text-red-500">{errors.message}</span>}
       </label>
 
       <div className="flex flex-wrap items-center gap-4">
@@ -130,3 +164,4 @@ export function ContactForm({
     </form>
   );
 }
+

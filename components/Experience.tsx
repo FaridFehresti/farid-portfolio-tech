@@ -22,6 +22,8 @@ export function Experience({ dict }: { dict: Dictionary }) {
                 <MediaHeader
                   name={job.company}
                   index={i}
+                  cover={job.cover}
+                  ratio="square"
                   badge={
                     job.current ? (
                       <span className="flex items-center gap-1.5">

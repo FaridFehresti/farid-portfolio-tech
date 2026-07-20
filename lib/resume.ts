@@ -7,6 +7,7 @@ export type Experience = {
   location: string;
   period: string;
   current?: boolean;
+  cover?: string;
 };
 
 export type Project = {
@@ -17,6 +18,7 @@ export type Project = {
   stack: string[];
   description: string;
   cover?: string; // optional cover image in /public (locale-invariant)
+  status?: "live" | "down";
 };
 
 export type SkillGroup = {
@@ -33,11 +35,11 @@ export type Reference = {
 export const profile = {
   name: "Farid Fehresti",
   brand: "FARIDTECH",
-  title: "Full Stack Developer · Technical Lead · AI Integration",
+  title: "High-Performance FinTech UI Engineer · AI Workflow Architect",
   tagline:
-    "I build products that generate revenue and stay in production — from CRM sales systems to international enterprise platforms.",
+    "I design low-latency trading dashboards and build secure, PostgreSQL-backed workflow automations to reduce manual operations.",
   summary:
-    "Over five years of experience working on projects that directly generate revenue — from CRM sales systems to international enterprise platforms. What has always mattered to me is that the code I write solves a real problem, not just runs. I've led teams, coded directly, and built products that are still in use today.",
+    "Over five years of experience engineering high-throughput, data-heavy interfaces for international financial platforms and orchestrating automated AI workflows. I specialize in complex state management (RxJS/NgRx/Zustand) for real-time applications, and building scalable API architectures (n8n/NestJS) that directly drive revenue and operational efficiency.",
 } as const;
 
 export const contact = {
@@ -51,8 +53,8 @@ export const contact = {
 } as const;
 
 export const stats: { value: string; label: string }[] = [
-  { value: "5+", label: "Years building revenue products" },
-  { value: "10+", label: "Apps shipped to production" },
+  { value: "5+", label: "Years building low-latency trading UI" },
+  { value: "10+", label: "AI & automated workflows shipped" },
   { value: "4", label: "International projects delivered" },
   { value: "2025", label: "Best Broker — Forex Expo Dubai" },
 ];
@@ -64,36 +66,42 @@ export const experience: Experience[] = [
     location: "Tehran",
     period: "Dec 2025 — Present",
     current: true,
+    cover: "/experience/tm.webp",
   },
   {
     role: "Senior Frontend Developer",
     company: "MondFX & FeneFX",
     location: "Tehran",
     period: "Jun — Nov 2024 · 4 mos",
+    cover: "/experience/mf.webp",
   },
   {
     role: "Frontend Team Lead",
     company: "Karen System",
     location: "Tehran",
     period: "Apr 2023 — Jun 2024 · 1 yr",
+    cover: "/experience/ks.webp",
   },
   {
     role: "Full Stack Developer (International Freelancer)",
     company: "Freelancer.com",
     location: "Remote",
     period: "Dec 2023 — Jun 2024 · 5 mos",
+    cover: "/experience/fr.webp",
   },
   {
     role: "Web Developer (Freelance)",
     company: "Carlancer",
     location: "Tehran",
     period: "Aug 2022 — Dec 2023 · 1 yr 5 mos",
+    cover: "/experience/ca.webp",
   },
   {
     role: "Frontend Programmer",
     company: "Nayan Fanavar Aria",
     location: "Zanjan",
     period: "Mar 2021 — Jul 2022 · 1 yr",
+    cover: "/experience/nf.webp",
   },
 ];
 
@@ -106,7 +114,7 @@ export const projects: Project[] = [
     cover: "/projects/mondfx.webp",
     stack: ["React", "TypeScript", "RxJS", "TailwindCSS", "Real-time"],
     description:
-      "International brokerage platform with 350+ trading instruments (Forex, crypto, gold, indices), leverage up to 1:500 and spreads from 0.0. Winner of Best Broker 2025 at Forex Expo Dubai & Money Expo India.",
+      "International brokerage platform with 350+ data-heavy trading instruments. Engineered high-throughput, low-latency trading dashboards utilizing complex state management (RxJS) to optimize UI performance in heavy data environments. Winner of Best Broker 2025 at Forex Expo Dubai.",
   },
   {
     name: "FeneFX",
@@ -116,7 +124,7 @@ export const projects: Project[] = [
     cover: "/projects/fenefx.webp",
     stack: ["Next.js", "TypeScript", "TailwindCSS", "Material-UI"],
     description:
-      "Persian-language prop trading platform with a challenge purchase system, trader panel, educational academy and 24-hour support. Built for Iranian traders.",
+      "Next.js prop trading UI/UX with a challenge purchase system, trader panel, and educational academy. Focused on seamless real-time data handling for Iranian traders.",
   },
   {
     name: "OneTapCard",
@@ -126,22 +134,24 @@ export const projects: Project[] = [
     cover: "/projects/onetapcard.webp",
     stack: ["Next.js", "NestJS", "PostgreSQL", "HubSpot API", "Zapier"],
     description:
-      "End-to-end NFC card platform: ordering flow, management panel, HubSpot & Zapier integration and a subscription system. Deployed on Nginx + Linux.",
+      "End-to-end NFC card platform backed by PostgreSQL. Implemented custom webhook receivers and automated business processes via HubSpot & Zapier to reduce manual operations.",
   },
   {
     name: "House of Traders",
     tagline: "Iran's Largest Trading Competition",
-    url: "https://house-of-traders.ir",
-    display: "house-of-traders.ir",
+    url: "https://ahangariholding.com/house-of-traders",
+    display: "ahangariholding.com/house-of-traders",
+    cover: "/projects/house-of-traders.webp",
     stack: ["Next.js", "NestJS", "PostgreSQL", "Payments", "Real-time"],
     description:
-      "Trader talent-identification event platform: registration, live draw, crypto wallet and a real-time timer for seasonal competitions.",
+      "Secure, PostgreSQL-backed talent-identification event platform. Built automated crypto wallet integrations and real-time timers for seasonal competitions.",
   },
   {
     name: "MadTalk",
     tagline: "Organizational LMS Platform",
-    url: "https://panel.beta.madtalk.ir",
-    display: "panel.beta.madtalk.ir",
+    url: "https://madtalk.ir",
+    display: "madtalk.ir",
+    cover: "/projects/madtalk.webp",
     stack: ["Next.js", "React", "Material-UI", "Ant Design", "RxJS"],
     description:
       "Organizational LMS UI — main modules, admin panel and a course sales system. Clients include the University of Zanjan.",
@@ -151,15 +161,17 @@ export const projects: Project[] = [
     tagline: "Financial Services & Investment Holding",
     url: "https://ahangariholding.com",
     display: "ahangariholding.com",
+    cover: "/projects/ahangariholding.webp",
     stack: ["Next.js", "TypeScript", "GSAP", "TailwindCSS"],
     description:
       "Website for a holding with offices in Business Bay Dubai — financial services, market education courses and specialized Forex content, with rich GSAP motion.",
   },
   {
-    name: "BestInform",
+    name: "Travel Theme",
     tagline: "International Travel Booking",
-    display: "eu.bestinform",
-    cover: "/projects/bestinform.webp",
+    url: "https://traveltheme.com/ro/",
+    display: "traveltheme.com",
+    cover: "/projects/traveltheme.webp",
     stack: ["Angular", "Angular Material", "RxJS", "NgRx", "Sass"],
     description:
       "Led a team of three freelancers to fully build the admin panel and user interface from Figma designs.",
@@ -167,8 +179,8 @@ export const projects: Project[] = [
   {
     name: "Deadlock Tools",
     tagline: "Competitive Games Statistics",
-    url: "https://deadlocktools.com",
     display: "deadlocktools.com",
+    status: "down",
     stack: ["Angular", "NestJS", "PostgreSQL", "Nginx", "Linux"],
     description:
       "Full stack development with infrastructure management — Nginx deployment and SSL certificates on a Linux server.",
@@ -178,17 +190,10 @@ export const projects: Project[] = [
     tagline: "Car Tuning Calculation",
     url: "https://tuningtech.co.uk",
     display: "tuningtech.co.uk",
+    cover: "/projects/tunningcompany.webp",
     stack: ["Next.js", "NestJS", "PostgreSQL", "Material-UI"],
     description:
       "Car parts upgrade-impact calculation system with a content-management panel for admins.",
-  },
-  {
-    name: "Asato",
-    tagline: "Insurance Unified Platform",
-    display: "ir.to.asa",
-    stack: ["Angular 17", "TypeScript", "Ant Design", "RxJS"],
-    description:
-      "Insurance platform UI and an Angular upgrade from v13 to v17 with complete architectural optimization.",
   },
 ];
 
