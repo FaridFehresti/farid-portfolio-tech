@@ -72,7 +72,7 @@ export async function generateMetadata({ params }: LayoutParams): Promise<Metada
       canonical: `/${lang}`,
       languages: { en: "/en", fa: "/fa" },
     },
-    icons: { icon: "/skull.png", apple: "/skull.png" },
+    icons: { icon: "/logo.svg", apple: "/logo.png" },
     manifest: "/manifest.webmanifest",
     robots: {
       index: true,
@@ -85,14 +85,14 @@ export async function generateMetadata({ params }: LayoutParams): Promise<Metada
       url: `${SITE_URL}/${lang}`,
       siteName: profile.brand,
       locale: lang === "fa" ? "fa_IR" : "en_US",
-      images: ["/skull.png"],
+      images: ["/logo.png"],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: profile.tagline,
-      images: ["/skull.png"],
+      images: ["/logo.png"],
     },
   };
 }
