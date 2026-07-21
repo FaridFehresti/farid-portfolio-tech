@@ -5,6 +5,7 @@ import type { Experience, Project, SkillGroup, Reference } from "./resume";
 export const profile = {
   name: "فرید فهرستی",
   brand: "FARIDTECH",
+  metaTitle: "فرید فهرستی — مهندس ارشد رابط کاربری و معمار هوش مصنوعی",
   title: "مهندس رابط کاربری پرفورمنس‌بالا برای FinTech · معمار جریان کاری هوش مصنوعی",
   tagline:
     "طراحی داشبوردهای معاملاتی با تأخیر پایین و ساخت اتوماسیون‌های امن بر بستر PostgreSQL برای کاهش عملیات دستی.",

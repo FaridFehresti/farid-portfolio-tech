@@ -166,7 +166,7 @@ const ui: Record<Locale, UIStrings> = {
 
 export type Dictionary = {
   locale: Locale;
-  profile: { name: string; brand: string; title: string; tagline: string; summary: string };
+  profile: { name: string; brand: string; metaTitle: string; title: string; tagline: string; summary: string };
   contact: {
     email: string;
     phone: string;

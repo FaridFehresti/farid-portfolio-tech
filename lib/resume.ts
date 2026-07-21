@@ -35,6 +35,7 @@ export type Reference = {
 export const profile = {
   name: "Farid Fehresti",
   brand: "FARIDTECH",
+  metaTitle: "Farid Fehresti — FinTech UI Engineer & AI Architect",
   title: "High-Performance FinTech UI Engineer · AI Workflow Architect",
   tagline:
     "I design low-latency trading dashboards and build secure, PostgreSQL-backed workflow automations to reduce manual operations.",

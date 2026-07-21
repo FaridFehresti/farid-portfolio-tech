@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: LayoutParams): Promise<Metada
   const { lang } = await params;
   if (!isLocale(lang)) return {};
   const { profile } = getDictionary(lang);
-  const title = `${profile.name} — ${profile.brand}`;
+  const title = profile.metaTitle;
 
   return {
     metadataBase: new URL(SITE_URL),
